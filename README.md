@@ -1,7 +1,7 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 <!-- until 215 in courses(next step:adding react icons) -->
-<!-- working on the main project -->
+<!-- working on janyar project -->
 
 ## Getting Started
 
