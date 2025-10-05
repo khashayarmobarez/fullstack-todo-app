@@ -1,5 +1,8 @@
 import Link from 'next/link';
 import React from 'react';
+import { VscListSelection } from "react-icons/vsc";
+import { IoAdd } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
 
 const Layout = ({children}) => {
     return (
@@ -15,7 +18,16 @@ const Layout = ({children}) => {
                     <p>Welcome 👋</p>
                     <ul>
                         <li>
+                            <VscListSelection />
                             <Link href="/">to dos</Link>
+                        </li>
+                        <li>
+                            <IoAdd />
+                            <Link href="/add-todo">add to do</Link>
+                        </li>
+                        <li>
+                            <CgProfile  />
+                            <Link href="/profile">profile</Link>
                         </li>
                     </ul>
                 </aside>
