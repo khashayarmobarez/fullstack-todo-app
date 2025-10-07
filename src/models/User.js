@@ -19,5 +19,10 @@ const userSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
+        immutable: true, 
     }
 });
+
+const User = models.User || model('User', userSchema);
+
+export default User;
