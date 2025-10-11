@@ -10,7 +10,7 @@ function SignupPage() {
       <button>register</button>
       <div>
         <p>Have an account?</p>
-        <Link>Sign in</Link>
+        <Link href='/signin'>Sign in</Link>
       </div>
     </div>
   )
