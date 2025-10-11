@@ -1,5 +1,6 @@
 'use client'
 import Link from "next/link"
+import { useRouter } from "next/router"
 import { useState } from "react"
 
 
@@ -7,6 +8,8 @@ function SignupPage() {
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const router = useRouter()
 
   const signUpHandler = async () => {
     const res = await fetch('/api/auth/signup', {
@@ -18,6 +21,7 @@ function SignupPage() {
     })
     const data = await res.json()
     console.log(data)
+    data.status === "success" && router.push('/signin')
   }
 
   return (
