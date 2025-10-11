@@ -1,3 +1,4 @@
+import Link from "next/link"
 
 
 function SignupPage() {
@@ -7,6 +8,10 @@ function SignupPage() {
       <input type="text" placeholder="Email" />
       <input type="password" placeholder="Password" />
       <button>register</button>
+      <div>
+        <p>Have an account?</p>
+        <Link>Sign in</Link>
+      </div>
     </div>
   )
 }
