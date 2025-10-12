@@ -3,20 +3,30 @@ import User from "@/models/User";
 import { hashPassword } from "@/utils/auth";
 import { NextResponse } from "next/server";
 
-async function handler(req, res) {
-  if (req.method !== "POST") return;
-
+export async function POST(request) {
+  // Connect to DB
   try {
     await connectDB();
   } catch (err) {
-    console.log(err);
+    console.error("DB connection error:", err);
     return NextResponse.json(
       { status: "failed", message: "Error in connecting to DB" },
       { status: 500 }
     );
   }
 
-  const { email, password } = req.body;
+  // Parse body
+  let body;
+  try {
+    body = await request.json();
+  } catch (err) {
+    return NextResponse.json(
+      { status: "failed", message: "Invalid JSON body" },
+      { status: 400 }
+    );
+  }
+
+  const { email, password } = body ?? {};
 
   if (!email || !password) {
     return NextResponse.json(
@@ -25,7 +35,7 @@ async function handler(req, res) {
     );
   }
 
-  const existingUser = await User.findOne({ email: email });
+  const existingUser = await User.findOne({ email });
 
   if (existingUser) {
     return NextResponse.json(
@@ -36,13 +46,11 @@ async function handler(req, res) {
 
   const hashedPassword = await hashPassword(password);
 
-  const newUser = await User.create({ email: email, password: hashedPassword });
-  console.log(newUser);
+  const newUser = await User.create({ email, password: hashedPassword });
+  console.log("Created user:", newUser);
 
   return NextResponse.json(
     { status: "success", message: "Created user!" },
     { status: 201 }
   );
 }
-
-export default handler;
