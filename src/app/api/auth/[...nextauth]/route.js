@@ -38,15 +38,7 @@ const handler = NextAuth({
                     return null;
                 }
 
-
-                // Replace with your own user authentication logic
-                if (
-                    credentials.email === "admin" &&
-                    credentials.password === "password"
-                ) {
-                    return { id: 1, name: "Admin", email: "admin@example.com" };
-                }
-                return null;
+                return { email: user.email };
             }
         })
     ],
