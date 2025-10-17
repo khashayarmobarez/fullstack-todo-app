@@ -21,7 +21,7 @@ function SignupPage() {
     })
     const data = await res.json()
     console.log(data)
-    data.status === "success" && router.push('/signin')
+    data.status === "success" && router.push('/signIn')
   }
 
   return (
