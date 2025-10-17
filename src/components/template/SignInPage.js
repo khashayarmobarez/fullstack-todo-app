@@ -1,22 +1,29 @@
 'use client'
 import Link from "next/link";
 import { useState } from "react";
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation";
 
 const SignInPage = () => {
 
+    const router = useRouter();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
 
     const signInHandler = async () => {
-        const res = await fetch('/api/auth/signin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        });
+        const res = await signIn(
+            'credentials',
+            {
+                redirect: false,
+                email,
+                password,
+            }
+        )
         const data = await res.json();
-        console.log(data);
+        console.log(data); 
+        (!res.error) && router.push('/todos');
     }
 
     return (
