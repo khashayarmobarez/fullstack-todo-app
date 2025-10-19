@@ -1,8 +1,13 @@
 "use client"
+
 import { grAddCircle } from 'react-icons/gr';
 import { BsAlignStart } from 'react-icons/bs';
+import { FiSettings } from 'react-icons/fi';
+import { AiOutlineFileSearch } from 'react-icons/ai';
+import { MdDoneAll } from 'react-icons/md';
+
 import { useState } from 'react';
-import { set } from 'mongoose';
+import RadioButton from '../elements/RadioButton';
 
 function AddToDo() {
 
@@ -26,19 +31,42 @@ function AddToDo() {
                 />
             </div>
             <div className='add-form__input--second'>
-                <div className='todo'>
-                    <label htmlFor='todo'>
-                        <BsAlignStart />
-                        to do
-                    </label>
-                    <input 
-                    type='radio' 
-                    id='todo'   
-                    value='todo'
-                    checked={status === 'todo'}
-                    onChange={e => setStatus(e.target.value)}
-                    />
-                </div>
+                
+                <RadioButton 
+                    title={'todo'}
+                    value={'todo'}
+                    status={status}
+                    setStatus={setStatus}
+                >
+                    <BsAlignStart />
+                </RadioButton> 
+                
+                <RadioButton 
+                    title={'In progress'}
+                    value={'inProgress'}
+                    status={status}
+                    setStatus={setStatus}
+                >
+                    <FiSettings />
+                </RadioButton> 
+                
+                <RadioButton 
+                    title={'Review'}
+                    value={'review'}
+                    status={status}
+                    setStatus={setStatus}
+                >
+                    <AiOutlineFileSearch />
+                </RadioButton> 
+                
+                <RadioButton 
+                    title={'Done'}
+                    value={'done'}
+                    status={status}
+                    setStatus={setStatus}
+                >
+                    <MdDoneAll />
+                </RadioButton> 
             </div>
         </div>
     </div>
