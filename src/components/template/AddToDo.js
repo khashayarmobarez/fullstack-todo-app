@@ -16,7 +16,7 @@ function AddToDo() {
     const [status, setStatus] = useState('todo');
 
     const addHandler = async () => {
-        const res = await fetch("/api/todos",{ 
+        const res = await fetch("/api/toDos",{ 
             method: "POST", 
             body: JSON.stringify({ title, status }), 
             headers: { "Content-Type": "application/json"
