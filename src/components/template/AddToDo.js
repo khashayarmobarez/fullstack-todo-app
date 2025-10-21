@@ -87,6 +87,7 @@ function AddToDo() {
                     <MdDoneAll />
                 </RadioButton> 
             </div>
+            <button onClick={addHandler}>Add Todo</button>
         </div>
     </div>
   )
