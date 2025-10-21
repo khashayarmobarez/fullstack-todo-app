@@ -1,3 +1,5 @@
+@import "react-toastify/dist/ReactToastify.css";
+
 html,
 body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,

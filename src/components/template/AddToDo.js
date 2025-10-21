@@ -1,6 +1,6 @@
 "use client"
 
-import { grAddCircle } from 'react-icons/gr';
+import { GrAddCircle } from 'react-icons/gr';
 import { BsAlignStart } from 'react-icons/bs';
 import { FiSettings } from 'react-icons/fi';
 import { AiOutlineFileSearch } from 'react-icons/ai';
@@ -8,16 +8,35 @@ import { MdDoneAll } from 'react-icons/md';
 
 import { useState } from 'react';
 import RadioButton from '../elements/RadioButton';
+import { toast } from 'react-toastify';
 
 function AddToDo() {
 
     const [title, setTitle] = useState('');
     const [status, setStatus] = useState('todo');
 
+    const addHandler = async () => {
+        const res = await fetch("/api/todos",{ 
+            method: "POST", 
+            body: JSON.stringify({ title, status }), 
+            headers: { "Content-Type": "application/json"
+        }});
+
+        const data = await res.json();
+        console.log(data);
+
+        if(data.status === 'success'){
+            setTitle('');
+            setStatus('todo');
+            toast.success("Todo added successfully!");
+        }
+    }
+
+
   return (
     <div className="add-form">
         <h2>
-            <grAddCircle />
+            <GrAddCircle />
             Add New Todo
         </h2>
         <div className="add-form__input">
