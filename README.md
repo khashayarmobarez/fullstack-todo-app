@@ -1,7 +1,6 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 <!-- until 229 in courses(next step:adding react icons) -->
-<!-- stuck at [...nextauth] update error, must change the method for the app router -->
 
 ## Getting Started
 
