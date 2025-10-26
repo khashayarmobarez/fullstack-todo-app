@@ -2,6 +2,7 @@ import User from "@/models/User";
 import connectDB from "@/utils/connectDB";
 import { getServerSession } from "next-auth/next";
 import { NextResponse } from "next/server";
+import { authOptions } from "@/utils/auth.config";
 
 export async function POST(request) {
     try {
@@ -14,8 +15,8 @@ export async function POST(request) {
         );
     }
 
-    // Get session from server-side
-    const session = await getServerSession();
+    // Get session from server-side with auth options
+    const session = await getServerSession(authOptions);
 
     if (!session) {
         return NextResponse.json(
