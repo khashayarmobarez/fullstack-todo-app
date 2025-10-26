@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { signIn, useSession } from "next-auth/react"
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const SignInPage = () => {
 
@@ -29,9 +30,15 @@ const SignInPage = () => {
                 password,
             }
         )
-        const data = await res.json();
-        console.log(data); 
-        (!res.error) && router.push('/todos');
+        
+        console.log("Sign in response:", res);
+        
+        if (res.error) {
+            toast.error("Invalid credentials!");
+        } else {
+            toast.success("Logged in successfully!");
+            router.push('/');
+        }
     }
 
     return (

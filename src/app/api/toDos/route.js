@@ -1,6 +1,6 @@
 import User from "@/models/User";
 import connectDB from "@/utils/connectDB";
-import { getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "@/utils/auth.config";
 
@@ -17,6 +17,8 @@ export async function POST(request) {
 
     // Get session from server-side with auth options
     const session = await getServerSession(authOptions);
+
+    console.log("Session:", session); // Debug log
 
     if (!session) {
         return NextResponse.json(
