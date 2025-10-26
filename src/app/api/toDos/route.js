@@ -1,24 +1,25 @@
 import User from "@/models/User";
 import connectDB from "@/utils/connectDB";
-import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
+import { NextResponse } from "next/server";
 
-export async function POST(request, response) {
-
+export async function POST(request) {
     try {
         await connectDB();
     } catch (err) {
         console.error("DB connection error:", err);
-        return new Response(
-            JSON.stringify({ status: "failed", message: "Error in connecting to DB" }),
+        return NextResponse.json(
+            { status: "failed", message: "Error in connecting to DB" },
             { status: 500 }
         );
     }
 
-    const session = await getSession(request);
+    // Get session from server-side
+    const session = await getServerSession();
 
     if (!session) {
-        return new Response(
-            JSON.stringify({ status: "failed", message: "Unauthorized" }),
+        return NextResponse.json(
+            { status: "failed", message: "Unauthorized" },
             { status: 401 }
         );
     }
@@ -26,26 +27,28 @@ export async function POST(request, response) {
     const user = await User.findOne({ email: session.user.email });
 
     if (!user) {
-        return new Response(
-            JSON.stringify({ status: "failed", message: "User not found" }),
+        return NextResponse.json(
+            { status: "failed", message: "User not found" },
             { status: 404 }
         );
     }
 
-    const { title, status } = await request.body;
+    // Parse the request body properly
+    const body = await request.json();
+    const { title, status } = body;
 
-    if(!title || !status) {
-        return new Response(
-            JSON.stringify({ status: "failed", message: "Invalid data" }),
+    if (!title || !status) {
+        return NextResponse.json(
+            { status: "failed", message: "Invalid data" },
             { status: 422 }
         );
-    } else {
-        user.toDos.push({ title, status });
-        await user.save();
-        
-        return new Response(
-            JSON.stringify({ status: "success", message: "ToDo added", toDos: user.toDos }),
-            { status: 201 }
-        );
     }
+
+    user.toDos.push({ title, status });
+    await user.save();
+    
+    return NextResponse.json(
+        { status: "success", message: "ToDo added", toDos: user.toDos },
+        { status: 201 }
+    );
 }
