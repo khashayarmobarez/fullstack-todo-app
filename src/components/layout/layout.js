@@ -9,7 +9,7 @@ const Layout = ({children}) => {
         <div className="container">
 
             <header className="header">
-                <h1>khashayar Todo App</h1>
+                <h1>Test App</h1>
             </header>
 
             <div className='container--main'>

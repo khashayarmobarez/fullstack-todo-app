@@ -78,8 +78,6 @@ export async function GET() {
             );
         }
 
-        console.log(user.toDos); // Debug log
-
         return NextResponse.json(
             { status: "success", toDos: user.toDos },
             { status: 200 }
