@@ -55,3 +55,40 @@ export async function POST(request) {
         { status: 201 }
     );
 }
+
+export async function GET() {
+    try {
+        await connectDB();
+
+        const session = await getServerSession(authOptions);
+
+        if (!session) {
+            return NextResponse.json(
+                { status: "failed", message: "Unauthorized" },
+                { status: 401 }
+            );
+        }
+
+        const user = await User.findOne({ email: session.user.email });
+
+        if (!user) {
+            return NextResponse.json(
+                { status: "failed", message: "User not found" },
+                { status: 404 }
+            );
+        }
+
+        console.log(user.toDos); // Debug log
+
+        return NextResponse.json(
+            { status: "success", toDos: user.toDos },
+            { status: 200 }
+        );
+    } catch (err) {
+        return NextResponse.json(
+            { status: "failed", message: "Error in fetching todos" },
+            { status: 500 }
+        );
+    }
+}
+        
