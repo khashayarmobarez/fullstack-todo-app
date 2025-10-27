@@ -3,6 +3,7 @@ import connectDB from "@/utils/connectDB";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 import { authOptions } from "@/utils/auth.config";
+import { sortToDos } from "@/utils/sortToDos";
 
 export async function POST(request) {
     try {
@@ -78,8 +79,10 @@ export async function GET() {
             );
         }
 
+        const sortedData = sortToDos(user.toDos); 
+
         return NextResponse.json(
-            { status: "success", toDos: user.toDos },
+            { status: "success", toDos: sortedData   },
             { status: 200 }
         );
     } catch (err) {
