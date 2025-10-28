@@ -1,7 +1,7 @@
-import Image from "next/image";
+import HomePage from "@/components/template/HomePage";
 
 export default function Home() {
   return (
-    <h1>Testing</h1>
+    <HomePage />
   );
 }
