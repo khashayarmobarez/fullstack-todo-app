@@ -20,8 +20,19 @@ function HomePage() {
     }
 
     return (
-        <div>
-        Home page
+        <div className="home-page">
+            <div className="home-page--todo">
+                <p>zu tun</p>
+            </div>
+            <div className="home-page--inProgress">
+                <p>In progress</p>
+            </div>
+            <div className="home-page--review">
+                <p>review</p>
+            </div>
+            <div className="home-page--done">
+                <p>done</p>
+            </div>
         </div>
     )
 }
