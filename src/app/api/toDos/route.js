@@ -59,7 +59,7 @@ export async function POST(request) {
 
 export async function GET() {
     try {
-        await connectDB();
+        await connectDB(); 
 
         const session = await getServerSession(authOptions);
 
@@ -79,15 +79,16 @@ export async function GET() {
             );
         }
 
-        const sortedData = sortToDos(user.toDos); 
+        const sortedData = sortToDos(user.toDos || []); 
 
         return NextResponse.json(
-            { status: "success", toDos: sortedData   },
+            { status: "success", toDos: sortedData },
             { status: 200 }
         );
     } catch (err) {
+        console.error("Error fetching todos:", err); // Add this log
         return NextResponse.json(
-            { status: "failed", message: "Error in fetching todos" },
+            { status: "failed", message: err.message || "Error in fetching todos" },
             { status: 500 }
         );
     }
