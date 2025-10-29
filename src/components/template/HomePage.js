@@ -1,5 +1,7 @@
 'use client'
 import { useEffect, useState } from "react"
+import Tasks from "@/components/module/Tasks"
+
 
 
 function HomePage() {
@@ -23,15 +25,19 @@ function HomePage() {
         <div className="home-page">
             <div className="home-page--todo">
                 <p>zu tun</p>
+                <Tasks data={toDos.todo} />   
             </div>
             <div className="home-page--inProgress">
                 <p>In progress</p>
+                <Tasks data={toDos.inProgress} />   
             </div>
             <div className="home-page--review">
                 <p>review</p>
+                <Tasks data={toDos.review} />   
             </div>
             <div className="home-page--done">
                 <p>done</p>
+                <Tasks data={toDos.done} />   
             </div>
         </div>
     )
