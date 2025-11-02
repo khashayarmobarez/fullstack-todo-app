@@ -1,6 +1,6 @@
 import { RiMastodonLine } from "react-icons/ri"; 
 
-function Tasks({ data = [] }) {
+function Tasks({ data = [], fetchToDos }) {
   return (
     <div className="tasks">
       {
