@@ -25,19 +25,19 @@ function HomePage() {
         <div className="home-page">
             <div className="home-page--todo">
                 <p>zu tun</p>
-                <Tasks data={toDos.todo} fetchToDos={fetchToDos}  />   
+                <Tasks data={toDos.todo} fetchToDos={fetchToDos} next='inProgress' />   
             </div>
             <div className="home-page--inProgress">
                 <p>In progress</p>
-                <Tasks data={toDos.inProgress} fetchToDos={fetchToDos} />   
+                <Tasks data={toDos.inProgress} fetchToDos={fetchToDos} next='review' back='todo' />   
             </div>
             <div className="home-page--review">
                 <p>review</p>
-                <Tasks data={toDos.review} fetchToDos={fetchToDos} />   
+                <Tasks data={toDos.review} fetchToDos={fetchToDos} next='done' back='inProgress' />   
             </div>
             <div className="home-page--done">
                 <p>done</p>
-                <Tasks data={toDos.done} fetchToDos={fetchToDos} />   
+                <Tasks data={toDos.done} fetchToDos={fetchToDos} back='review' />   
             </div>
         </div>
     )
