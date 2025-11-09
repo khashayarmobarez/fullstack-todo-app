@@ -1,6 +1,9 @@
 import User from "@/models/User";
 import { verifyPassword } from "@/utils/auth";
 import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
+import connectDB from "@/utils/connectDB";
+import { authOptions } from "@/utils/auth.config";
 
 export async function POST(request) {
     try {
@@ -20,7 +23,14 @@ export async function POST(request) {
             );
         }
 
-        const {name, lastname, password} = await request.json();
+        const {name, lastName, password} = await request.json();
+
+        if (!password) {
+            return NextResponse.json(
+                { status: "failed", message: "Password is required" },
+                { status: 400 }
+            );
+        }
 
         const isValidPassword = await verifyPassword(password, user.password);
 
@@ -32,7 +42,7 @@ export async function POST(request) {
         }
 
         if (name) user.name = name;
-        if (lastname) user.lastname = lastname;
+        if (lastName) user.lastname = lastName;
         await user.save();
 
         return NextResponse.json(

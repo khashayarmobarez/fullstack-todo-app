@@ -9,7 +9,22 @@ function ProfilePage() {
     const [lastName, setLastName] = useState('')
     const [password, setPassword] = useState('')
 
-    const submitHandler = (e) => {
+    const submitHandler = async(e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch("/api/profile", {
+                method: "POST",
+                body: JSON.stringify({name, lastName, password}),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            
+            const data = await res.json();
+            console.log(data);
+        } catch (error) {
+            console.error("Error updating profile:", error);
+        }
     }
 
   return (
