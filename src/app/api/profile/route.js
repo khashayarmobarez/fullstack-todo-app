@@ -46,7 +46,7 @@ export async function POST(request) {
         await user.save();
 
         return NextResponse.json(
-            { status: "success", message: "Profile updated successfully", user: { email: user.email, name: user.name, lastname: user.lastname } },
+            { status: "success", message: "Profile updated successfully", user: { email: user.email, name: user.name, lastName: user.lastname } },
             { status: 200 },
         );
     } catch (err) {
@@ -77,7 +77,7 @@ export async function GET(request) {
             );
         }
         return NextResponse.json(
-            { status: "success", data: { email: user.email, name: user.name, lastname: user.lastname } },
+            { status: "success", data: { email: user.email, name: user.name, lastName: user.lastname } },
             { status: 200 },
         );
     } catch (err) {
