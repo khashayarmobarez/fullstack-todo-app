@@ -13,7 +13,7 @@ function ProfilePage() {
 
     useEffect(() => {
         fetchProfile();
-    })
+    }, [])
 
     const fetchProfile = async () => {
         const res = await fetch("/api/profile");
@@ -34,8 +34,17 @@ function ProfilePage() {
                 }
             });
             
-            const data = await res.json();
-            console.log(data);
+            const result = await res.json();
+            console.log(result);
+            
+            if (result.status === "success") {
+                // Clear form fields after successful update
+                setName('');
+                setLastName('');
+                setPassword('');
+                // Fetch updated profile data
+                await fetchProfile();
+            }
         } catch (error) {
             console.error("Error updating profile:", error);
         }

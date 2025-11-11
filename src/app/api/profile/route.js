@@ -42,11 +42,11 @@ export async function POST(request) {
         }
 
         if (name) user.name = name;
-        if (lastName) user.lastname = lastName;
+        if (lastName) user.lastName = lastName;
         await user.save();
 
         return NextResponse.json(
-            { status: "success", message: "Profile updated successfully", user: { email: user.email, name: user.name, lastName: user.lastname } },
+            { status: "success", message: "Profile updated successfully", user: { email: user.email, name: user.name, lastName: user.lastName } },
             { status: 200 },
         );
     } catch (err) {
@@ -77,7 +77,7 @@ export async function GET(request) {
             );
         }
         return NextResponse.json(
-            { status: "success", data: { email: user.email, name: user.name, lastName: user.lastname } },
+            { status: "success", data: { email: user.email, name: user.name, lastName: user.lastName } },
             { status: 200 },
         );
     } catch (err) {

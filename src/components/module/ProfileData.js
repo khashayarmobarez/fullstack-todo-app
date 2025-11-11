@@ -5,9 +5,11 @@ function ProfileData({data}) {
     <div className='profile-data'>
         <div>
             <span>Name:</span>
-            <p>name: {data.data.name}</p>
-            <p>last name:{data.data.lastName}</p>
-            <p>email: {data.data.email}</p>
+            <p>{data?.name}</p>
+            <span>last name:</span>
+            <p>{data?.lastName}</p>
+            <span>email:</span>
+            <p>{data?.email}</p>
         </div>
     </div>
   )
