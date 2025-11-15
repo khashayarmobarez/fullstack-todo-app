@@ -22,6 +22,7 @@ function Tasks({ data = [], fetchToDos, back, next }) {
                 <span className={task.status}></span>
                 <RiMastodonLine />
                 <h4>{task.title}</h4>
+                <p>{task.description}</p>
                 <div>
                   {
                     back ? (<button className="button-back" onClick={() => changeStatus(task._id, back)}><BiLeftArrow/> back</button>) : null

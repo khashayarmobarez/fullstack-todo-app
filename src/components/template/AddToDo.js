@@ -13,12 +13,13 @@ import { toast } from 'react-toastify';
 function AddToDo() {
 
     const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [status, setStatus] = useState('todo');
 
     const addHandler = async () => {
         const res = await fetch("/api/toDos",{ 
             method: "POST", 
-            body: JSON.stringify({ title, status }), 
+            body: JSON.stringify({ title, status, description }), 
             headers: { "Content-Type": "application/json"
         }});
 
@@ -28,6 +29,7 @@ function AddToDo() {
         if(data.status === 'success'){
             setTitle('');
             setStatus('todo');
+            setDescription('');
             toast.success("Todo added successfully!");
         }
     }
@@ -47,6 +49,15 @@ function AddToDo() {
                 type='text' 
                 value={title} 
                 onChange={(e) => setTitle(e.target.value)}
+                />
+            </div>
+            <div className='add-form__input--first'>
+                <label htmlFor='description'>Description:</label>
+                <input 
+                id='description' 
+                type='text' 
+                value={description} 
+                onChange={(e) => setDescription(e.target.value)}
                 />
             </div>
             <div className='add-form__input--second'>

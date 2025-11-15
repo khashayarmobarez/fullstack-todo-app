@@ -39,7 +39,8 @@ export async function POST(request) {
 
     // Parse the request body properly
     const body = await request.json();
-    const { title, status } = body;
+    console.log("AddToDo body:", body);
+    const { title, description, status } = body;
 
     if (!title || !status) {
         return NextResponse.json(
@@ -48,8 +49,10 @@ export async function POST(request) {
         );
     }
 
-    user.toDos.push({ title, status });
+    user.toDos.push({ title, status, description });
     await user.save();
+    // Log the saved entry to confirm persistence
+    console.log("Saved toDo (last):", user.toDos[user.toDos.length - 1]);
     
     return NextResponse.json(
         { status: "success", message: "ToDo added", toDos: user.toDos },

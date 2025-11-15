@@ -14,6 +14,7 @@ const userSchema = new Schema({
     lastName: String,
     toDos: [{
         title:String,
+        description: String,
         status: String
     }],
     createdAt: {
