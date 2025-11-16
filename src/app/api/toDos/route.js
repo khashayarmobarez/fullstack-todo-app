@@ -49,7 +49,12 @@ export async function POST(request) {
         );
     }
 
-    user.toDos.push({ title, status, description });
+    const toDoItem = { title, status };
+    if (description && description.trim()) {
+        toDoItem.description = description;
+    }
+    
+    user.toDos.push(toDoItem);
     await user.save();
     // Log the saved entry to confirm persistence
     console.log("Saved toDo (last):", user.toDos[user.toDos.length - 1]);
